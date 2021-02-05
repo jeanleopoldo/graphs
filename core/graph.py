@@ -1,6 +1,7 @@
 class graph:
     def __init__(self):
-        print("graph")
+        self.nodes = []
+        self.edges = []
 
     def func(self):
         print("kk")
