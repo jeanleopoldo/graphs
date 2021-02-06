@@ -1,2 +1,2 @@
-from model.edge import edge
-from model.node import node
+from model.Edge import Edge
+from model.Node import Node
