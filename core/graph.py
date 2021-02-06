@@ -1,7 +1,7 @@
 class graph:
-    def __init__(self):
-        self.nodes = []
+    def __init__(self, nodes):
+        self.nodes = nodes
         self.edges = []
 
-    def func(self):
-        print("kk")
+    def qtdVertices(self):
+        return len(self.nodes)
