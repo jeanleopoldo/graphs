@@ -8,11 +8,12 @@ class bfs:
 
     def search(self):
         index = 0
+        visited_nodes = []
         while len(self.queue) != 0:
             current_node = self.queue.pop()
             current_node_edges = current_node.get_edges()
             print("{} : {}".format(index, current_node.get_sequence()))
-            visited_nodes = []
+            
 
             index = index+1
             nodes = self.graph.get_nodes()
