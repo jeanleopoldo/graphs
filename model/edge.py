@@ -11,3 +11,6 @@ class Edge:
         return self.end
     def get_weight(self):
         return self.weight
+    def print_start_and_end(self):
+        print("start:", self.start)
+        print("end:", self.end)

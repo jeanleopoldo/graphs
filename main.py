@@ -1,6 +1,7 @@
 from core.Graph import Graph
 from model.Edge import Edge
 from model.Node import Node
+from breadth_first_search.BFS import bfs
 from input.input_reader import read_raw_input
 import sys
 
@@ -25,9 +26,15 @@ def populate_nodes(nodes_representation, edges):
             if number == edge_start:
                 edges_for_node.append(edge)
             
-        node = Node(edges_for_node)
+        node = Node(representation, edges_for_node)
         nodes.append(node)
     return nodes
+
+def find_root(nodes):
+    for node in nodes:
+        if node.sequence is '1':
+            return node
+    raise Exception("Could not find a root")
 
 if __name__ == '__main__':
     file_name = sys.argv[1]
@@ -36,7 +43,11 @@ if __name__ == '__main__':
     edges_representation = graph_representation[1]
 
     edges = populate_edges(edges_representation)
-    nodes = populate_nodes(nodes_representation, edges)
 
-    graph = Graph(nodes)
-    print(graph.qtdVertices())
+    nodes = populate_nodes(nodes_representation, edges)
+    root  = find_root(nodes)
+
+    graph = Graph(root, nodes)
+    
+    breadth_search = bfs(graph)
+    breadth_search.search()
