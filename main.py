@@ -11,15 +11,15 @@ def populate_edges(edges_representation):
         start  = representation[0]
         end    = representation[1]
         weight = representation[2]
-        edge = Edge(start,end,weight)
+        edge   = Edge(start,end,weight)
         edges.append(edge)
     return edges
 
 def populate_nodes(nodes_representation, edges):
     nodes = []
     for representation in nodes_representation:
-        aux = representation.split()
-        number = aux[0]
+        aux            = representation.split()
+        number         = aux[0]
         edges_for_node = []
         for edge in edges:
             edge_start = edge.get_start()
@@ -30,12 +30,6 @@ def populate_nodes(nodes_representation, edges):
         nodes.append(node)
     return nodes
 
-def find_root(nodes):
-    for node in nodes:
-        if node.sequence is '1':
-            return node
-    raise Exception("Could not find a root")
-
 if __name__ == '__main__':
     file_name = sys.argv[1]
     graph_representation = read_raw_input(file_name)
@@ -43,11 +37,11 @@ if __name__ == '__main__':
     edges_representation = graph_representation[1]
 
     edges = populate_edges(edges_representation)
-
     nodes = populate_nodes(nodes_representation, edges)
-    root  = find_root(nodes)
 
-    graph = Graph(root, nodes)
-    
-    breadth_search = bfs(graph)
-    breadth_search.search()
+    # running with every node as a root
+    for node in nodes:
+        root  = node
+        graph = Graph(root, nodes)
+        breadth_search = bfs(graph)
+        breadth_search.search()

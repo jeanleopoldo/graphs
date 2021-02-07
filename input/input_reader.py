@@ -1,9 +1,9 @@
 
 
 def read_raw_input(file_name):
-    graph = []
-    nodes = []
-    edges = []
+    graph    = []
+    nodes    = []
+    edges    = []
     is_nodes = False
     is_edges = False
     file = open(file_name, "r")
