@@ -1,6 +1,6 @@
 from core.Graph import Graph
-from model.Edge import Edge
-from model.Node import Node
+from model.edge import Edge
+from model.node import Node
 from breadth_first_search.BFS import bfs
 from input.input_reader import read_raw_input
 import sys
