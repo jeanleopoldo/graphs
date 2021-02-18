@@ -1,1 +1,1 @@
-from core.Graph import Graph
+from core.graph import Graph

@@ -4,6 +4,7 @@ class Edge:
         self.start  = start
         self.end    = end
         self.weight = weight
+        self.visited = False
 
     def get_start(self):
         return self.start
@@ -11,6 +12,10 @@ class Edge:
         return self.end
     def get_weight(self):
         return self.weight
+    def get_has_been_visited(self):
+        return self.visited
+    def set_has_been_visited(self, visited):
+        self.visited = visited
     def print_start_and_end(self):
         print("start:", self.start)
         print("end:", self.end)
