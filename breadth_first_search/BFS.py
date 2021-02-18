@@ -1,5 +1,4 @@
-from core.Graph import Graph
-from model.node import Node
+
 class bfs:
     def __init__(self, graph):
         self.graph = graph
@@ -7,7 +6,6 @@ class bfs:
         self.queue.append(self.graph.get_root())
 
     def search(self):
-
         while len(self.queue) != 0:
             current_node       = self.queue.pop()
             current_node_edges = current_node.get_edges()
@@ -24,4 +22,5 @@ class bfs:
                         node.set_ancestral(current_node)
                         node.set_distance_to_root(distance_to_root)
                         self.queue.append(node)
-                        print(distance_to_root)
+
+
