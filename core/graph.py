@@ -10,6 +10,7 @@ class Graph:
         self.nodes_map                 = {}
         self.edges_map                 = {}
         self.root.set_distance_to_root(0)
+        self.set_all_edges_to_not_visited()
         self.init_graph()
 
 
@@ -66,4 +67,8 @@ class Graph:
             if not edge.get_has_been_visited():
                 return False
         return True
+    
+    def set_all_edges_to_not_visited(self):
+        for edge in self.edges:
+            edge.set_has_been_visited(False)
     

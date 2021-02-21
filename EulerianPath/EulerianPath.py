@@ -21,7 +21,8 @@ class EulerianPath:
             try:
                 sub_path = self.find_sub_eulerian_path(current_node)
             except Exception:
-                return [False, []]
+                print("Not possible to find a euleria path from this node as a start")
+                return
 
             found_edge_to_visit = False
             for node in sub_path:
@@ -82,4 +83,4 @@ class EulerianPath:
     
     def print_path(self):
         for node in self.eulerian_path:
-            print("-->", node.get_rotulo())
+            print("-->", node.get_sequence(), node.get_rotulo())
