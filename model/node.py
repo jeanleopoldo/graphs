@@ -5,8 +5,8 @@ class Node:
         self.edges    = edges
         self.has_been_visited = False
     
-    def get_edges(self):
-        return self.edges
+    def rotulo(self):
+        return self.label
     def get_sequence(self):
         return self.sequence
     def get_ancestral(self):
