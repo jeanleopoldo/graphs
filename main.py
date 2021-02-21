@@ -14,6 +14,16 @@ def breadth_first_search(nodes, edges):
         breadth_search = bfs(graph)
         breadth_search.search()
 
+def eulerian_path_finder(nodes,edges):
+    for node in nodes:
+        root  = node
+        graph = Graph(root, nodes, edges)
+        eulerian_path_search = EulerianPath(graph)
+        eulerian_path_search.search()
+        eulerian_path_search.print_path()
+
+        print("#####")
+
 def populate_edges(edges_representation):
     edges = []
     for representation in edges_representation:
@@ -42,5 +52,10 @@ if __name__ == '__main__':
     nodes = populate_nodes(nodes_representation)
 
     # running with every node as a root
-    breadth_first_search(nodes, edges)
+
+    # Exercício 2
+    #breadth_first_search(nodes, edges)
+
+    # Exercício 3
+    eulerian_path_finder(nodes, edges)
     

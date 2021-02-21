@@ -4,7 +4,7 @@ class Node:
         self.label    = label[2:-1]
         self.has_been_visited = False
     
-    def rotulo(self):
+    def get_rotulo(self):
         return self.label
     def get_sequence(self):
         return self.sequence
