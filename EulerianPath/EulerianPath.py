@@ -16,50 +16,51 @@ class EulerianPath:
 
     def search(self):
         current_node       = self.graph.get_root()
-        current_node_index = 0
-        while not self.graph.all_edges_have_been_visited():
+        keep_searching = True
+        while keep_searching:
             try:
                 sub_path = self.find_sub_eulerian_path(current_node)
             except Exception:
-                print("Not possible to find a euleria path from this node as a start")
+                print("Not possible to find a eulerian path for this graph")
                 return
 
-            found_edge_to_visit = False
-            for node in sub_path:
+            try:
+                next_node = self.find_next_node_as_root(sub_path)
+            except Exception:
+                keep_searching = False
 
-                if self.graph.has_edge_not_visited(node) and not found_edge_to_visit:
-                    found_edge_to_visit = True
-                    next_node = node
-
-            if len(self.eulerian_path) !=0:
-                current_node_index = self.eulerian_path.index(next_node)
-                index              = -1
-                aux                = []
-                for node in self.eulerian_path:
-                    index = index+1
-                    if index <= current_node_index or index == len(self.eulerian_path):
-                        continue
-                    if node is not current_node:
-                        aux.append(node)
-                
-                del self.eulerian_path[current_node_index]
-                index = len(self.eulerian_path)-1
-                for node in self.eulerian_path:
-                    if index >= current_node_index:
-                        self.eulerian_path.pop(index)
-                        index = index-1
-                    else:
-                        break
-
-                for node in sub_path:
-                    self.eulerian_path.append(node)
-                
-                for left_node in aux:
-                    self.eulerian_path.append(left_node)
+            if len(self.eulerian_path) == 0:
+                self.add_sub_path_to_list(sub_path)
             else:
-                for node in sub_path:
-                    self.eulerian_path.append(node)
-            current_node = next_node
+                self.add_nodes_to_path(sub_path, next_node)
+                
+            
+            if keep_searching:
+                current_node = next_node
+
+    def add_sub_path_to_list(self, sub_path):
+        for node in sub_path:
+            self.eulerian_path.append(node)
+
+    def add_nodes_to_path(self, sub_path, next_node):
+        
+        current_node_index = self.eulerian_path.index(next_node)
+        nodes_to_shift = self.get_nodes_to_shift(current_node_index)
+
+        for node in sub_path:
+            self.eulerian_path.append(node)
+        
+        index = len(nodes_to_shift)-1
+        for i in range(len(nodes_to_shift)):
+            shifted_node = nodes_to_shift.pop(index)
+            self.eulerian_path.append(shifted_node)
+            index=index-1
+
+    def find_next_node_as_root(self, sub_path):
+        for node in sub_path:
+            if self.graph.has_edge_not_visited(node):
+                return node
+        raise Exception("There are no nodes with edges not visited in sub_path")
 
     def find_sub_eulerian_path(self,node):
         sub_path     = []
@@ -80,6 +81,16 @@ class EulerianPath:
             raise Exception
         else:
             return sub_path
+    
+    def get_nodes_to_shift(self, current_node_index):
+        index          = len(self.eulerian_path)-1
+        nodes_to_shift = []
+        while index>=current_node_index:
+            node = self.eulerian_path.pop(index)
+            nodes_to_shift.append(node)
+            index = index-1
+        nodes_to_shift.pop(len(nodes_to_shift)-1)
+        return nodes_to_shift
     
     def print_path(self):
         for node in self.eulerian_path:
