@@ -4,7 +4,6 @@ class Graph:
         self.nodes                     = nodes
         self.root                      = root
         self.edges                     = edges
-        self.root.set_has_been_visited = False
         self.node_to_edges             = {}
         self.nodes_map                 = {}
         self.edges_map                 = {}

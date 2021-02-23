@@ -53,7 +53,7 @@ if __name__ == '__main__':
     # running with every node as a root
 
     # Exercicio 2
-    #breadth_first_search(nodes, edges)
+    breadth_first_search(nodes, edges)
 
     # Exercicio 3
     eulerian_path_finder(nodes, edges)

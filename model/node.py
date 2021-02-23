@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, label):
-        self.sequence = label.split()[0]
-        self.label    = label[2:-1]
+        self.sequence         = label.split()[0]
+        self.label            = label[2:-1]
         self.has_been_visited = False
     
     def get_rotulo(self):
@@ -13,10 +13,10 @@ class Node:
     def get_distance_to_root(self):
         return self.distance_to_root
     def get_has_been_visited(self):
-        return self.visited
+        return self.has_been_visited
     
-    def set_has_been_visited(self, has):
-        self.visited = has
+    def set_has_been_visited(self, b):
+        self.has_been_visited = b
     def set_ancestral(self, ancestral):
         self.ancestral = ancestral
     def set_distance_to_root(self, distance_to_root):
