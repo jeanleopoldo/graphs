@@ -1,4 +1,3 @@
-from model.TypesOfEdge import LEAVING
 from model.edge import Edge
 class Graph:
     def __init__(self, root, nodes, edges):
@@ -21,14 +20,14 @@ class Graph:
     def populate_map_with_nodes(self):
         for node in self.nodes:
             self.node_to_edges[node.get_sequence()] = {}
-            self.node_to_edges[node.get_sequence()][LEAVING]  = []
+            self.node_to_edges[node.get_sequence()]  = []
             self.nodes_map[node.get_sequence()]               = node
     def populate_map_with_edges(self):
             for from_edge in self.edges:
-                self.node_to_edges[from_edge.get_start()][LEAVING].append(from_edge)
+                self.node_to_edges[from_edge.get_start()].append(from_edge)
 
                 to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
-                self.node_to_edges[to_edge.get_start()][LEAVING].append(to_edge)
+                self.node_to_edges[to_edge.get_start()].append(to_edge)
                 self.edges_map[from_edge] = to_edge
                 self.edges_map[to_edge] = from_edge
                 
@@ -49,7 +48,7 @@ class Graph:
     def get_nodes(self):
         return self.nodes
     def has_edge_not_visited(self,node):
-        edges = self.node_to_edges[node.get_sequence()][LEAVING]
+        edges = self.node_to_edges[node.get_sequence()]
         for edge in edges:
             edge_has_been_visited = edge.get_has_been_visited()
             if not edge_has_been_visited:
@@ -60,7 +59,7 @@ class Graph:
         edge.set_has_been_visited(True)
         self.edges_map[edge].set_has_been_visited(True)
     def get_node_edges(self, node):
-        return self.node_to_edges[node.get_sequence()][LEAVING]
+        return self.node_to_edges[node.get_sequence()]
     
     def all_edges_have_been_visited(self):
         for edge in self.edges:
