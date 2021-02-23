@@ -20,7 +20,6 @@ def eulerian_path_finder(nodes,edges):
         graph = Graph(root, nodes, edges)
         eulerian_path_search = EulerianPath(graph)
         eulerian_path_search.search()
-        eulerian_path_search.print_path()
 
         print("#####")
 

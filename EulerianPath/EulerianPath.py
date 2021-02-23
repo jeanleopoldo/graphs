@@ -28,6 +28,9 @@ class EulerianPath:
                 next_node = self.find_next_node_as_root(sub_path)
             except Exception:
                 keep_searching = False
+                if not self.graph.all_edges_have_been_visited():
+                    print("Not possible to find a eulerian path for this graph")
+                    return
 
             if len(self.eulerian_path) == 0:
                 self.add_sub_path_to_list(sub_path)
@@ -37,6 +40,8 @@ class EulerianPath:
             
             if keep_searching:
                 current_node = next_node
+        
+        self.print_path()
 
     def add_sub_path_to_list(self, sub_path):
         for node in sub_path:
