@@ -73,6 +73,7 @@ class EulerianPath:
         found_path   = False
         sub_path.append(current_node)
         
+        # TODO this may cause inifinite loop
         while not found_path:
             edge      = self.get_not_visited_edge(current_node)
             self.graph.update_visited_edges(edge)
