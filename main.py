@@ -1,9 +1,27 @@
-from core.Graph import Graph
-from model.Edge import Edge
-from model.Node import Node
+
+from core.graph import Graph
+from model.edge import Edge
+from model.node import Node
 from breadth_first_search.BFS import bfs
+from EulerianPath.EulerianPath import EulerianPath
 from input.input_reader import read_raw_input
 import sys
+
+def breadth_first_search(nodes, edges):
+    for node in nodes:
+        root  = node
+        graph = Graph(root, nodes, edges)
+        breadth_search = bfs(graph)
+        breadth_search.search()
+
+def eulerian_path_finder(nodes,edges):
+    for node in nodes:
+        root  = node
+        graph = Graph(root, nodes, edges)
+        eulerian_path_search = EulerianPath(graph)
+        eulerian_path_search.search()
+
+        print("#####")
 
 def populate_edges(edges_representation):
     edges = []
@@ -15,33 +33,28 @@ def populate_edges(edges_representation):
         edges.append(edge)
     return edges
 
-def populate_nodes(nodes_representation, edges):
+def populate_nodes(nodes_representation):
     nodes = []
     for representation in nodes_representation:
-        aux            = representation.split()
-        number         = aux[0]
-        edges_for_node = []
-        for edge in edges:
-            edge_start = edge.get_start()
-            if number == edge_start:
-                edges_for_node.append(edge)
-            
-        node = Node(representation, edges_for_node)
+        node = Node(representation)
         nodes.append(node)
     return nodes
 
 if __name__ == '__main__':
-    file_name = sys.argv[1]
+    # file_name = sys.argv[1]
+    file_name = 'ContemCicloEuleriano.net'
     graph_representation = read_raw_input(file_name)
     nodes_representation = graph_representation[0]
     edges_representation = graph_representation[1]
 
     edges = populate_edges(edges_representation)
-    nodes = populate_nodes(nodes_representation, edges)
+    nodes = populate_nodes(nodes_representation)
 
     # running with every node as a root
-    for node in nodes:
-        root  = node
-        graph = Graph(root, nodes)
-        breadth_search = bfs(graph)
-        breadth_search.search()
+
+    # Exercicio 2
+    breadth_first_search(nodes, edges)
+
+    # Exercicio 3
+    eulerian_path_finder(nodes, edges)
+    
