@@ -1,26 +1,39 @@
 from model.edge import Edge
+from constants.constants import INFINITY
 class Graph:
-    def __init__(self, root, nodes, edges):
-        self.nodes                     = nodes
-        self.root                      = root
-        self.edges                     = edges
-        self.node_to_edges             = {}
-        self.nodes_map                 = {}
-        self.edges_map                 = {}
-        self.root.set_distance_to_root(0)
-        self.set_all_edges_to_not_visited()
+    def __init__(self, root,nodes, edges, is_directed):
+        self.nodes         = nodes
+        self.root          = root
+        self.edges         = edges
+        self.is_directed   = is_directed
+        self.node_to_edges = {}
+        self.nodes_map     = {}
+        self.edges_map     = {}
         self.init_graph()
+        self.root.set_distance_to_root(0)
 
 
     def init_graph(self):
         self.populate_map_with_nodes()
         self.populate_map_with_edges()
+        self.populate_distances_to_nodes()
+
+    def populate_distances_to_nodes(self):
+
+        self.root.set_distance_to_node(self.root,0)
+        for from_node in self.nodes:
+            from_node.set_distance_to_root(INFINITY)
+            for to_node in self.nodes:
+                if from_node.get_sequence() == to_node.get_sequence():
+                    continue
+                else:
+                    from_node.set_distance_to_node(to_node, INFINITY)
         
     def populate_map_with_nodes(self):
         for node in self.nodes:
             self.node_to_edges[node.get_sequence()] = {}
-            self.node_to_edges[node.get_sequence()]  = []
-            self.nodes_map[node.get_sequence()]               = node
+            self.node_to_edges[node.get_sequence()] = []
+            self.nodes_map[node.get_sequence()]     = node
     def populate_map_with_edges(self):
             for from_edge in self.edges:
                 self.node_to_edges[from_edge.get_start()].append(from_edge)
@@ -28,9 +41,11 @@ class Graph:
                 to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
                 self.node_to_edges[to_edge.get_start()].append(to_edge)
                 self.edges_map[from_edge] = to_edge
-                self.edges_map[to_edge] = from_edge
+                if not self.is_directed:
+                    self.edges_map[to_edge]   = from_edge
                 
-
+    def get_nodes_and_edges(self):
+        return self.node_to_edges
     def qtdVertices(self):
         return len(self.nodes)
     def qtdArestas(self):
@@ -69,4 +84,8 @@ class Graph:
     def set_all_edges_to_not_visited(self):
         for edge in self.edges:
             edge.set_has_been_visited(False)
+
+    # for tests purpose only
+    def get_root(self):
+        return self.root
     

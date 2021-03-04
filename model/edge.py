@@ -11,7 +11,7 @@ class Edge:
     def get_end(self):
         return self.end
     def get_weight(self):
-        return self.weight
+        return float(self.weight)
     def get_has_been_visited(self):
         return self.visited
     def set_has_been_visited(self, visited):
