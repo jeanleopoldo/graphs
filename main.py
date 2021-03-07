@@ -1,4 +1,5 @@
-
+from core.tools import reset_edges_to_not_visited
+from core.tools import reset_nodes_to_not_visited
 from core.graph import Graph
 from model.edge import Edge
 from model.node import Node
@@ -18,17 +19,23 @@ def breadth_first_search(nodes, edges):
 def eulerian_path_finder(nodes,edges):
     for node in nodes:
         root  = node
-        graph = Graph(root, nodes, edges, False)
+        graph = Graph(root, nodes, edges, True)
         eulerian_path_search = EulerianPath(graph)
         eulerian_path_search.search()
+        reset_nodes_to_not_visited(nodes)
+        reset_edges_to_not_visited(edges)
 
         print("#####")
 
 def djikstra(nodes, edges):
-    root = nodes[0]
-    graph = Graph(root,nodes,edges, True)
-    spf = SPF(graph)
-    spf.search_shortest_path()
+    for node in nodes:
+        print("root-> {} {}".format(node.get_sequence(), node.get_rotulo()))
+        root = node
+        graph = Graph(root, nodes, edges, True)
+        spf = SPF(graph)
+        spf.search_shortest_path()
+        reset_nodes_to_not_visited(nodes)
+        reset_edges_to_not_visited(edges)
 
 
 def populate_edges(edges_representation):

@@ -8,7 +8,6 @@ class Graph:
         self.is_directed   = is_directed
         self.node_to_edges = {}
         self.nodes_map     = {}
-        self.edges_map     = {}
         self.init_graph()
         self.root.set_distance_to_root(0)
 
@@ -38,11 +37,10 @@ class Graph:
             for from_edge in self.edges:
                 self.node_to_edges[from_edge.get_start()].append(from_edge)
 
-                to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
-                self.node_to_edges[to_edge.get_start()].append(to_edge)
-                self.edges_map[from_edge] = to_edge
                 if not self.is_directed:
-                    self.edges_map[to_edge]   = from_edge
+                    to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
+                    self.node_to_edges[to_edge.get_start()].append(to_edge)
+
                 
     def get_nodes_and_edges(self):
         return self.node_to_edges
@@ -69,9 +67,6 @@ class Graph:
                 return True
         return False
 
-    def update_visited_edges(self, edge):
-        edge.set_has_been_visited(True)
-        self.edges_map[edge].set_has_been_visited(True)
     def get_node_edges(self, node):
         return self.node_to_edges[node.get_sequence()]
     
