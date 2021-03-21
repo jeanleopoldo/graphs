@@ -16,6 +16,11 @@ class Node:
         return self.has_been_visited
     def get_distance_to_node(self, node):
         return self.distances_to_nodes[node.get_sequence()]
+
+    def exist_key_in_map_distances(self, node):
+        if node.get_sequence() in self.distances_to_nodes:
+            return True
+        return False
     def get_distance_to_root(self):
         return self.distance_to_root
 

@@ -8,6 +8,7 @@ class Graph:
         self.is_directed   = is_directed
         self.node_to_edges = {}
         self.nodes_map     = {}
+        self.floyd_warshall_map = {}
         self.init_graph()
         self.root.set_distance_to_root(0)
 
@@ -19,27 +20,41 @@ class Graph:
 
     def populate_distances_to_nodes(self):
 
-        self.root.set_distance_to_node(self.root,0)
         for from_node in self.nodes:
-            from_node.set_distance_to_root(INFINITY)
             for to_node in self.nodes:
+                
+                
                 if from_node.get_sequence() == to_node.get_sequence():
-                    continue
-                else:
-                    from_node.set_distance_to_node(to_node, INFINITY)
+                    self.floyd_warshall_map[from_node.get_sequence()][to_node.get_sequence()] = 0
+                elif not to_node.get_sequence() in self.floyd_warshall_map[from_node.get_sequence()]:
+                    self.floyd_warshall_map[from_node.get_sequence()][to_node.get_sequence()] = INFINITY
+
         
     def populate_map_with_nodes(self):
         for node in self.nodes:
             self.node_to_edges[node.get_sequence()] = {}
             self.node_to_edges[node.get_sequence()] = []
             self.nodes_map[node.get_sequence()]     = node
+
     def populate_map_with_edges(self):
             for from_edge in self.edges:
-                self.node_to_edges[from_edge.get_start()].append(from_edge)
+                from_node_sequence = from_edge.get_start()
+                vertex = self.nodes_map[from_node_sequence]
+                self.node_to_edges[vertex.get_sequence()].append(from_edge)
+
+                if not from_edge.get_start() in self.floyd_warshall_map:
+                    self.floyd_warshall_map[from_edge.get_start()] = {}
+                self.floyd_warshall_map[from_edge.get_start()][from_edge.get_end()] = from_edge.get_weight()
+
 
                 if not self.is_directed:
                     to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
                     self.node_to_edges[to_edge.get_start()].append(to_edge)
+                    #TODO fill map when not directed
+
+            for node in self.get_nodes():
+                if not node.get_sequence() in self.floyd_warshall_map:
+                    self.floyd_warshall_map[node.get_sequence()] = {}
 
                 
     def get_nodes_and_edges(self):
@@ -79,8 +94,13 @@ class Graph:
     def set_all_edges_to_not_visited(self):
         for edge in self.edges:
             edge.set_has_been_visited(False)
+    def get_distances_between_nodes(self, from_node, to_node):
+        return self.floyd_warshall_map[from_node.get_sequence()][to_node.get_sequence()]
 
+    def set_distances_between_nodes(self, from_node, to_node, distance):
+        self.floyd_warshall_map[from_node.get_sequence()][to_node.get_sequence()] = distance
     # for tests purpose only
     def get_root(self):
         return self.root
     
+
