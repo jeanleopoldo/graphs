@@ -7,7 +7,7 @@ from breadth_first_search.BFS import bfs
 from eulerian_path.EulerianPath import EulerianPath
 from dijkstra_spf.spf import SPF
 from floyd_warshall.FloydWarshall import FloydWarshall
-from depth_first_search.DFS import DFS
+from strongly_connected_component.SCC import StronglyConnectedComponent
 
 import sys
 
@@ -50,7 +50,7 @@ def floyd_warshall(nodes, edges):
 def depth_first_search(nodes, edges):
     root = nodes[0]
     graph = Graph(root, nodes, edges, True)
-    dfs = DFS(graph)
+    dfs = StronglyConnectedComponent(graph)
     dfs.search()
 
 
@@ -74,7 +74,7 @@ def populate_nodes(nodes_representation):
 if __name__ == '__main__':
     # TODO get it from file properly
     # file_name = sys.argv[1]
-    file_name = 'ContemCicloEuleriano.net'
+    file_name = 'connected_graph.net'
     graph_representation = read_raw_input(file_name)
     nodes_representation = graph_representation[0]
     edges_representation = graph_representation[1]

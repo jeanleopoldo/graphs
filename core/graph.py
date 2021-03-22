@@ -1,5 +1,6 @@
 from model.edge import Edge
 from constants.constants import INFINITY
+from operator import attrgetter
 class Graph:
     def __init__(self, root,nodes, edges, is_directed):
         self.nodes         = nodes
@@ -37,24 +38,24 @@ class Graph:
             self.nodes_map[node.get_sequence()]     = node
 
     def populate_map_with_edges(self):
-            for from_edge in self.edges:
-                from_node_sequence = from_edge.get_start()
-                vertex = self.nodes_map[from_node_sequence]
-                self.node_to_edges[vertex.get_sequence()].append(from_edge)
+        for from_edge in self.edges:
+            from_node_sequence = from_edge.get_start()
+            vertex = self.nodes_map[from_node_sequence]
+            self.node_to_edges[vertex.get_sequence()].append(from_edge)
 
-                if not from_edge.get_start() in self.floyd_warshall_map:
-                    self.floyd_warshall_map[from_edge.get_start()] = {}
-                self.floyd_warshall_map[from_edge.get_start()][from_edge.get_end()] = from_edge.get_weight()
+            if not from_edge.get_start() in self.floyd_warshall_map:
+                self.floyd_warshall_map[from_edge.get_start()] = {}
+            self.floyd_warshall_map[from_edge.get_start()][from_edge.get_end()] = from_edge.get_weight()
 
 
-                if not self.is_directed:
-                    to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
-                    self.node_to_edges[to_edge.get_start()].append(to_edge)
-                    #TODO fill map when not directed
+            if not self.is_directed:
+                to_edge = Edge(from_edge.get_end(), from_edge.get_start(), from_edge.get_weight())
+                self.node_to_edges[to_edge.get_start()].append(to_edge)
+                #TODO fill map when not directed
 
-            for node in self.get_nodes():
-                if not node.get_sequence() in self.floyd_warshall_map:
-                    self.floyd_warshall_map[node.get_sequence()] = {}
+        for node in self.get_nodes():
+            if not node.get_sequence() in self.floyd_warshall_map:
+                self.floyd_warshall_map[node.get_sequence()] = {}
 
                 
     def get_nodes_and_edges(self):
@@ -103,4 +104,21 @@ class Graph:
     def get_root(self):
         return self.root
     
+    def get_transpose_graph(self):
 
+        edges = []
+        for edge in self.edges:
+            transposed_edge = Edge(edge.get_end(), edge.get_start(), edge.get_weight())
+            edges.append(transposed_edge)
+
+        transposed_graph = Graph(self.root, self.nodes, edges, self.is_directed)
+        return transposed_graph
+
+    def sort_node_by_end_time(self):
+        self.nodes.sort(key = attrgetter('end_time'), reverse = True)
+        for node in self.nodes:
+            time = node.get_end_time()
+            print(time)
+
+    def get_edges(self):
+        return self.edges
