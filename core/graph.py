@@ -114,11 +114,8 @@ class Graph:
         transposed_graph = Graph(self.root, self.nodes, edges, self.is_directed)
         return transposed_graph
 
-    def sort_node_by_end_time(self):
+    def sort_nodes_by_end_time(self):
         self.nodes.sort(key = attrgetter('end_time'), reverse = True)
-        for node in self.nodes:
-            time = node.get_end_time()
-            print(time)
 
     def get_edges(self):
         return self.edges

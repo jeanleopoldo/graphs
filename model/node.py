@@ -9,7 +9,7 @@ class Node:
         self.distances_to_nodes = {}
         self.ancestral          = None
         self.start_time         = INFINITY
-        self.end_time         = INFINITY
+        self.end_time          = INFINITY
     
     def get_rotulo(self):
         return self.label

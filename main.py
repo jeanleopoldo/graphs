@@ -8,6 +8,7 @@ from eulerian_path.EulerianPath import EulerianPath
 from dijkstra_spf.spf import SPF
 from floyd_warshall.FloydWarshall import FloydWarshall
 from strongly_connected_component.SCC import StronglyConnectedComponent
+from topological_order.top_search import top_search
 
 import sys
 
@@ -53,6 +54,13 @@ def depth_first_search(nodes, edges):
     dfs = StronglyConnectedComponent(graph)
     dfs.search()
 
+def topological_algorithm(nodes, edges):
+    root = nodes[0]
+    graph = Graph(root, nodes, edges, True)
+    topological_search = top_search(graph)
+    result = topological_search.search_top()
+
+
 
 def populate_edges(edges_representation):
     edges = []
@@ -97,4 +105,6 @@ if __name__ == '__main__':
     #floyd_warshall(nodes,edges)
 
     depth_first_search(nodes, edges)
+
+    #topological_algorithm(nodes,edges)
     
