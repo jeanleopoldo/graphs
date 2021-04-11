@@ -11,6 +11,7 @@ class Node:
         self.start_time         = INFINITY
         self.end_time           = INFINITY
         self.reachable_nodes    = {self}
+        self.distance_to_root   = 0
 
     def get_rotulo(self):
         return self.label
