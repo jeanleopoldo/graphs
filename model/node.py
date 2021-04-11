@@ -9,8 +9,9 @@ class Node:
         self.distances_to_nodes = {}
         self.ancestral          = None
         self.start_time         = INFINITY
-        self.end_time          = INFINITY
-    
+        self.end_time           = INFINITY
+        self.reachable_nodes    = {self}
+
     def get_rotulo(self):
         return self.label
     def get_sequence(self):
@@ -27,6 +28,8 @@ class Node:
         self.start_time
     def get_end_time(self):
         return self.end_time
+    def get_reachable_nodes(self):
+        return self.reachable_nodes
     # ######### |get|
     def set_has_been_visited(self, b):
         self.has_been_visited = b
@@ -41,7 +44,8 @@ class Node:
     
     def set_end_time(self,end_time):
         self.end_time = end_time
-
+    def set_reachable_nodes(self,reachable_nodes):
+        self.reachable_nodes = reachable_nodes
 
 
     def exist_key_in_map_distances(self, node):

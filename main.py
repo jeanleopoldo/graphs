@@ -9,6 +9,7 @@ from dijkstra_spf.spf import SPF
 from floyd_warshall.FloydWarshall import FloydWarshall
 from strongly_connected_component.SCC import StronglyConnectedComponent
 from topological_order.top_search import top_search
+from kruskal_msf.kruskal import Kruskal
 
 import sys
 
@@ -48,7 +49,7 @@ def floyd_warshall(nodes, edges):
         floyd_warshall.search()
         reset(nodes, edges)
 
-def depth_first_search(nodes, edges):
+def strongly_connected_component(nodes, edges):
     root = nodes[0]
     graph = Graph(root, nodes, edges, True)
     dfs = StronglyConnectedComponent(graph)
@@ -60,7 +61,11 @@ def topological_algorithm(nodes, edges):
     topological_search = top_search(graph)
     result = topological_search.search_top()
 
-
+def kruskal_algorithm(nodes,edges):
+    root = nodes[0]
+    graph = Graph(root, nodes, edges, False)
+    algorithm = Kruskal(graph)
+    algorithm.algorithm()
 
 def populate_edges(edges_representation):
     edges = []
@@ -81,8 +86,8 @@ def populate_nodes(nodes_representation):
 
 if __name__ == '__main__':
     # TODO get it from file properly
-    # file_name = sys.argv[1]
-    file_name = 'connected_graph.net'
+    algorithm = sys.argv[1]
+    file_name = sys.argv[2]
     graph_representation = read_raw_input(file_name)
     nodes_representation = graph_representation[0]
     edges_representation = graph_representation[1]
@@ -93,18 +98,21 @@ if __name__ == '__main__':
     # running with every node as a root
 
     # Exercicio 2
-    #breadth_first_search(nodes, edges)
-
+    if algorithm == "1":
+        breadth_first_search(nodes, edges)
     # Exercicio 3
-    #eulerian_path_finder(nodes, edges)
-
+    elif algorithm == "2":
+        eulerian_path_finder(nodes, edges)
     # Exercicio 4
-    #djikstra(nodes,edges)
-
+    elif algorithm == "3":
+        djikstra(nodes,edges)
     # Exercicio 5
-    #floyd_warshall(nodes,edges)
-
-    depth_first_search(nodes, edges)
-
-    #topological_algorithm(nodes,edges)
+    elif algorithm == "4":
+        floyd_warshall(nodes,edges)
+    elif algorithm == "5":
+        strongly_connected_component(nodes, edges)
+    elif algorithm == "6":
+        topological_algorithm(nodes,edges)
+    elif algorithm == "7":
+        kruskal_algorithm(nodes,edges)
     

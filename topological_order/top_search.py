@@ -11,7 +11,7 @@ class top_search:
                 self.DFS(node)
         
         for node in self.top_list:
-            print(node.get_sequence())
+            print(node.get_rotulo(), "--> ")
         return self.top_list
 
     def DFS(self, node):

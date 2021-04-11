@@ -7,16 +7,18 @@ class StronglyConnectedComponent:
         self.time = 0
         
     def search(self):
-        self.dfs(self.graph)
+        
         transposed_graph = self.graph.get_transpose_graph()
-        transposed_graph.sort_nodes_by_end_time()
-        reset(transposed_graph.get_nodes(), transposed_graph.get_edges())
-        components = self.dfs(transposed_graph)
+        self.dfs(transposed_graph)
+        reset(self.graph.get_nodes(), self.graph.get_edges())
+        self.graph.sort_nodes_by_end_time()
+        components = self.dfs(self.graph)
 
         index = 1
         for component in components:
             print("{}-component {}".format(index,component))
             index = index+1
+
 
     def dfs(self, graph):
 

@@ -117,5 +117,8 @@ class Graph:
     def sort_nodes_by_end_time(self):
         self.nodes.sort(key = attrgetter('end_time'), reverse = True)
 
+    def sort_edges_by_weight(self):
+        self.edges.sort(key = attrgetter('weight'), reverse = False)
+
     def get_edges(self):
         return self.edges
