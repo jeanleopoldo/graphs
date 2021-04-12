@@ -85,7 +85,7 @@ def populate_nodes(nodes_representation):
     return nodes
 
 if __name__ == '__main__':
-    # TODO get it from file properly
+    
     algorithm = sys.argv[1]
     file_name = sys.argv[2]
     graph_representation = read_raw_input(file_name)
@@ -95,24 +95,25 @@ if __name__ == '__main__':
     edges = populate_edges(edges_representation)
     nodes = populate_nodes(nodes_representation)
 
-    # running with every node as a root
-
-    # Exercicio 2
+    # Exercicio 1
     if algorithm == "1":
         breadth_first_search(nodes, edges)
-    # Exercicio 3
+    # Exercicio 2
     elif algorithm == "2":
         eulerian_path_finder(nodes, edges)
-    # Exercicio 4
+    # Exercicio 3
     elif algorithm == "3":
         djikstra(nodes,edges)
-    # Exercicio 5
+    # Exercicio 4
     elif algorithm == "4":
         floyd_warshall(nodes,edges)
+    # Exercicio 5
     elif algorithm == "5":
         strongly_connected_component(nodes, edges)
+    # Exercicio 6
     elif algorithm == "6":
         topological_algorithm(nodes,edges)
+    # Exercicio 7
     elif algorithm == "7":
         kruskal_algorithm(nodes,edges)
     

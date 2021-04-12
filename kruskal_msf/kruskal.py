@@ -15,7 +15,6 @@ class Kruskal:
             v = self.graph.get_node_by_sequence(edge.get_end())
             u_reachable = u.get_reachable_nodes()
             v_reachable = v.get_reachable_nodes()
-            # TODO VERIFICAR SE FUNCIONA
             if u_reachable is not v_reachable:
                 self.agm.append(edge)
                 x = u_reachable.union(v_reachable)

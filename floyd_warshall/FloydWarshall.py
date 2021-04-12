@@ -8,7 +8,7 @@ class FloydWarshall:
         for k in self.graph.get_nodes():
             for i in self.graph.get_nodes():
                 for j in self.graph.get_nodes():
-                    distance_ij = self.graph.get_distances_between_nodes(i,j)
+                    distance_ij = self.graph.get_distance+---s_between_nodes(i,j)
                     distance_ik = self.graph.get_distances_between_nodes(i,k)
                     distance_kj = self.graph.get_distances_between_nodes(k,j)
                     
