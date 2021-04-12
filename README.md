@@ -10,8 +10,8 @@ Abaixo, a numeraçao referente a cada algoritmo:
 # 2 - Eulerian Path
 # 3 - Djikstra
 # 4 - FloydWarshall
-# 5 StronglyConnectedComponent
-# 6 Topological Order
-# 7 Kruskal
+# 5 - StronglyConnectedComponent
+# 6 - Topological Order
+# 7 - Kruskal
 
 Trabalho de grafos INE5413
