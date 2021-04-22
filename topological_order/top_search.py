@@ -1,8 +1,8 @@
 class top_search:
     def __init__(self, graph):
-        self.graph = graph
+        self.graph     = graph
         self.init_time =  0
-        self.top_list = []
+        self.top_list  = []
 
     def search_top(self):
         nodes = self.graph.get_nodes()

@@ -15,16 +15,16 @@ import sys
 
 def breadth_first_search(nodes, edges):
     for node in nodes:
-        root  = node
-        graph = Graph(root, nodes, edges, False)
+        root           = node
+        graph          = Graph(root, nodes, edges, False)
         breadth_search = bfs(graph)
         breadth_search.search()
         reset(nodes, edges)
 
 def eulerian_path_finder(nodes,edges):
     for node in nodes:
-        root  = node
-        graph = Graph(root, nodes, edges, True)
+        root                 = node
+        graph                = Graph(root, nodes, edges, True)
         eulerian_path_search = EulerianPath(graph)
         eulerian_path_search.search()
         reset(nodes, edges)
@@ -34,36 +34,36 @@ def eulerian_path_finder(nodes,edges):
 def djikstra(nodes, edges):
     for node in nodes:
         print("root-> {} {}".format(node.get_sequence(), node.get_rotulo()))
-        root = node
+        root  = node
         graph = Graph(root, nodes, edges, True)
-        spf = SPF(graph)
+        spf   = SPF(graph)
         spf.search_shortest_path()
         reset(nodes, edges)
 
 def floyd_warshall(nodes, edges):
     for node in nodes:
         print("root-> {} {}".format(node.get_sequence(), node.get_rotulo()))
-        root = node
-        graph = Graph(root, nodes, edges, True)
+        root           = node
+        graph          = Graph(root, nodes, edges, True)
         floyd_warshall = FloydWarshall(graph)
         floyd_warshall.search()
         reset(nodes, edges)
 
 def strongly_connected_component(nodes, edges):
-    root = nodes[0]
+    root  = nodes[0]
     graph = Graph(root, nodes, edges, True)
-    dfs = StronglyConnectedComponent(graph)
+    dfs   = StronglyConnectedComponent(graph)
     dfs.search()
 
 def topological_algorithm(nodes, edges):
-    root = nodes[0]
-    graph = Graph(root, nodes, edges, True)
+    root               = nodes[0]
+    graph              = Graph(root, nodes, edges, True)
     topological_search = top_search(graph)
-    result = topological_search.search_top()
+    topological_search.search_top()
 
 def kruskal_algorithm(nodes,edges):
-    root = nodes[0]
-    graph = Graph(root, nodes, edges, False)
+    root      = nodes[0]
+    graph     = Graph(root, nodes, edges, False)
     algorithm = Kruskal(graph)
     algorithm.algorithm()
 

@@ -2,14 +2,16 @@ from model.edge import Edge
 from constants.constants import INFINITY
 from operator import attrgetter
 class Graph:
-    def __init__(self, root,nodes, edges, is_directed):
-        self.nodes         = nodes
-        self.root          = root
-        self.edges         = edges
-        self.is_directed   = is_directed
-        self.node_to_edges = {}
-        self.nodes_map     = {}
+    def __init__(self, root, destination, nodes, edges, is_directed):
+        self.nodes              = nodes
+        self.root               = root
+        self.destination        = destination
+        self.edges              = edges
+        self.is_directed        = is_directed
+        self.node_to_edges      = {}
+        self.nodes_map          = {}
         self.floyd_warshall_map = {}
+        self.residual_network   = {}
         self.init_graph()
         self.root.set_distance_to_root(0)
 
@@ -23,8 +25,6 @@ class Graph:
 
         for from_node in self.nodes:
             for to_node in self.nodes:
-                
-                
                 if from_node.get_sequence() == to_node.get_sequence():
                     self.floyd_warshall_map[from_node.get_sequence()][to_node.get_sequence()] = 0
                 elif not to_node.get_sequence() in self.floyd_warshall_map[from_node.get_sequence()]:
@@ -33,15 +33,19 @@ class Graph:
         
     def populate_map_with_nodes(self):
         for node in self.nodes:
-            self.node_to_edges[node.get_sequence()] = {}
-            self.node_to_edges[node.get_sequence()] = []
-            self.nodes_map[node.get_sequence()]     = node
+            self.node_to_edges[node.get_sequence()]    = {}
+            self.residual_network[node.get_sequence()] = {}
+            self.node_to_edges[node.get_sequence()]    = []
+            self.nodes_map[node.get_sequence()]        = node
+            
 
     def populate_map_with_edges(self):
         for from_edge in self.edges:
             from_node_sequence = from_edge.get_start()
             vertex = self.nodes_map[from_node_sequence]
             self.node_to_edges[vertex.get_sequence()].append(from_edge)
+            residual_edge = Edge(from_edge.get_end(), from_edge.get_start(), 0)
+            self.residual_network[vertex.get_sequence()].append(residual_edge)
 
             if not from_edge.get_start() in self.floyd_warshall_map:
                 self.floyd_warshall_map[from_edge.get_start()] = {}
@@ -70,7 +74,14 @@ class Graph:
 
     def get_node_by_sequence(self, sequence):
         return self.nodes_map[sequence]
+    def get_residual_edge(self, edge):
+        edges = self.destination[edge.get_start()]
+        for r in edges:
+            if r.same_edge(edge):
+                return r
     
+    def get_destination(self):
+        return self.destination
     def get_root(self):
         return self.root
     def get_nodes(self):

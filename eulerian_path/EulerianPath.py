@@ -77,7 +77,7 @@ class EulerianPath:
         while not self.graph.all_edges_have_been_visited():
             edge      = self.get_not_visited_edge(current_node)
             edge.set_has_been_visited(True)
-            other = self.graph.get_reverse_edge(edge)
+            other     = self.graph.get_reverse_edge(edge)
             other.set_has_been_visited(True)
             next_node = self.graph.get_node_by_sequence(edge.get_end())
             current_node = next_node
@@ -95,7 +95,7 @@ class EulerianPath:
         index          = len(self.eulerian_path)-1
         nodes_to_shift = []
         while index>=current_node_index:
-            node = self.eulerian_path.pop(index)
+            node  = self.eulerian_path.pop(index)
             nodes_to_shift.append(node)
             index = index-1
         nodes_to_shift.pop(len(nodes_to_shift)-1)

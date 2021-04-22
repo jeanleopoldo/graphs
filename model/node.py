@@ -42,7 +42,6 @@ class Node:
         self.distance_to_root = distance
     def set_start_time(self,start_time):
         self.start_time = start_time
-    
     def set_end_time(self,end_time):
         self.end_time = end_time
     def set_reachable_nodes(self,reachable_nodes):
