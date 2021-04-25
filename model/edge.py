@@ -20,5 +20,7 @@ class Edge:
         print("start:", self.start)
         print("end:", self.end)
 
+    def set_weight(self, weight):
+        self.weight = weight
     def same_edge(self, edge):
-        return edge.get_start() == self.start and edge.get_end() == self.end
+        return edge.get_start() == self.end and edge.get_end() == self.start

@@ -10,6 +10,7 @@ from floyd_warshall.FloydWarshall import FloydWarshall
 from strongly_connected_component.SCC import StronglyConnectedComponent
 from topological_order.top_search import top_search
 from kruskal_msf.kruskal import Kruskal
+from maximum_flow.Edmonds_Karp import Edmonds_Karp
 
 import sys
 
@@ -67,6 +68,15 @@ def kruskal_algorithm(nodes,edges):
     algorithm = Kruskal(graph)
     algorithm.algorithm()
 
+def flow_network(nodes, edges):
+    root = nodes[0]
+    destination = nodes[len(nodes)-2]
+
+    graph = Graph(root, destination, nodes, edges, True)
+    edmonds_karp = Edmonds_Karp(graph)
+    edmonds_karp.find_maximum_flow()
+
+
 def populate_edges(edges_representation):
     edges = []
     for representation in edges_representation:
@@ -86,8 +96,8 @@ def populate_nodes(nodes_representation):
 
 if __name__ == '__main__':
     
-    algorithm = sys.argv[1]
-    file_name = sys.argv[2]
+    algorithm = "8" #sys.argv[1]
+    file_name = "graph.net" # sys.argv[2]
     graph_representation = read_raw_input(file_name)
     nodes_representation = graph_representation[0]
     edges_representation = graph_representation[1]
@@ -116,4 +126,6 @@ if __name__ == '__main__':
     # Exercicio 7
     elif algorithm == "7":
         kruskal_algorithm(nodes,edges)
+    elif algorithm =="8":
+        flow_network(nodes, edges)
     

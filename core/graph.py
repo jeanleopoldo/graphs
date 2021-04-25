@@ -33,8 +33,7 @@ class Graph:
         
     def populate_map_with_nodes(self):
         for node in self.nodes:
-            self.node_to_edges[node.get_sequence()]    = {}
-            self.residual_network[node.get_sequence()] = {}
+            self.residual_network[node.get_sequence()] = []
             self.node_to_edges[node.get_sequence()]    = []
             self.nodes_map[node.get_sequence()]        = node
             
@@ -45,7 +44,7 @@ class Graph:
             vertex = self.nodes_map[from_node_sequence]
             self.node_to_edges[vertex.get_sequence()].append(from_edge)
             residual_edge = Edge(from_edge.get_end(), from_edge.get_start(), 0)
-            self.residual_network[vertex.get_sequence()].append(residual_edge)
+            self.residual_network[from_edge.get_end()].append(residual_edge)
 
             if not from_edge.get_start() in self.floyd_warshall_map:
                 self.floyd_warshall_map[from_edge.get_start()] = {}
@@ -75,7 +74,7 @@ class Graph:
     def get_node_by_sequence(self, sequence):
         return self.nodes_map[sequence]
     def get_residual_edge(self, edge):
-        edges = self.destination[edge.get_start()]
+        edges = self.residual_network[edge.get_end()]
         for r in edges:
             if r.same_edge(edge):
                 return r
@@ -106,6 +105,9 @@ class Graph:
     def set_all_edges_to_not_visited(self):
         for edge in self.edges:
             edge.set_has_been_visited(False)
+    def set_all_nodes_to_not_visited(self):
+        for node in self.nodes:
+            node.set_has_been_visited(False)
     def get_distances_between_nodes(self, from_node, to_node):
         return self.floyd_warshall_map[from_node.get_sequence()][to_node.get_sequence()]
 
