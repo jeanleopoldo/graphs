@@ -4,10 +4,10 @@ from constants.constants import INFINITY
 
 class Edmonds_Karp:
     def __init__(self, graph):
-        self.graph = graph
-        self.queue = []
+        self.graph        = graph
+        self.queue        = []
         self.maximum_flux = []
-        self.flow = 0
+        self.flow         = 0
 
     def find_maximum_flow(self):
         
@@ -17,7 +17,7 @@ class Edmonds_Karp:
 
                 self.calculate_flow(path)
                 for edge in path:
-                    residual_edge = self.graph.get_residual_edge(edge)
+                    residual_edge  = self.graph.get_residual_edge(edge)
                     residual_value = residual_edge.get_weight()
                     residual_value = residual_value+edge.get_weight()
                     edge_value     = residual_value-edge.get_weight()
@@ -67,7 +67,7 @@ class Edmonds_Karp:
     def get_path(self, path):
         
         minimum_path = []
-        index = len(path)-1
+        index        = len(path)-1
         current_edge = path[index]
         minimum_path.append(current_edge)
         while index>-1:
@@ -77,7 +77,4 @@ class Edmonds_Karp:
                     minimum_path.append(edge)
                     current_edge = edge
                     break
-
-
-
         return minimum_path
