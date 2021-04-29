@@ -11,7 +11,7 @@ class Edge:
     def get_end(self):
         return self.end
     def get_weight(self):
-        return self.weight
+        return float(self.weight)
     def get_has_been_visited(self):
         return self.visited
     def set_has_been_visited(self, visited):
@@ -19,3 +19,8 @@ class Edge:
     def print_start_and_end(self):
         print("start:", self.start)
         print("end:", self.end)
+
+    def set_weight(self, weight):
+        self.weight = weight
+    def same_edge(self, edge):
+        return edge.get_start() == self.end and edge.get_end() == self.start

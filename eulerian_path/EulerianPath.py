@@ -73,14 +73,18 @@ class EulerianPath:
         found_path   = False
         sub_path.append(current_node)
         
-        while not found_path:
+        # TODO this may cause inifinite loop
+        while not self.graph.all_edges_have_been_visited():
             edge      = self.get_not_visited_edge(current_node)
-            self.graph.update_visited_edges(edge)
+            edge.set_has_been_visited(True)
+            other     = self.graph.get_reverse_edge(edge)
+            other.set_has_been_visited(True)
             next_node = self.graph.get_node_by_sequence(edge.get_end())
             current_node = next_node
             sub_path.append(current_node)
             if next_node.get_sequence() == sub_path[0].get_sequence():
                 found_path = True
+                break
         
         if not found_path:
             raise Exception
@@ -91,7 +95,7 @@ class EulerianPath:
         index          = len(self.eulerian_path)-1
         nodes_to_shift = []
         while index>=current_node_index:
-            node = self.eulerian_path.pop(index)
+            node  = self.eulerian_path.pop(index)
             nodes_to_shift.append(node)
             index = index-1
         nodes_to_shift.pop(len(nodes_to_shift)-1)
