@@ -11,6 +11,7 @@ from strongly_connected_component.SCC import StronglyConnectedComponent
 from topological_order.top_search import top_search
 from kruskal_msf.kruskal import Kruskal
 from maximum_flow.Edmonds_Karp import Edmonds_Karp
+from maximum_matching.HopcroftKarp import HopcroftKarp
 
 import sys
 
@@ -76,6 +77,13 @@ def flow_network(nodes, edges):
     edmonds_karp = Edmonds_Karp(graph)
     edmonds_karp.find_maximum_flow()
 
+def maximum_matching(nodes,edges):
+    root = nodes[0]
+    destination = nodes[len(nodes)-2]
+    graph = Graph(root, destination, nodes, edges, False)
+    hp = HopcroftKarp(graph)
+    hp.find()
+
 
 def populate_edges(edges_representation):
     edges = []
@@ -128,4 +136,6 @@ if __name__ == '__main__':
         kruskal_algorithm(nodes,edges)
     elif algorithm =="8":
         flow_network(nodes, edges)
+    elif algorithm == "9":
+        maximum_matching(nodes, edges)
     
