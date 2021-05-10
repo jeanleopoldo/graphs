@@ -11,6 +11,8 @@ from strongly_connected_component.SCC import StronglyConnectedComponent
 from topological_order.top_search import top_search
 from kruskal_msf.kruskal import Kruskal
 from maximum_flow.Edmonds_Karp import Edmonds_Karp
+from maximum_matching.HopcroftKarp import HopcroftKarp
+from colouring_graph.LawlerAlgorithm import LawlerColouringGraphAlgorithm
 
 import sys
 
@@ -76,6 +78,20 @@ def flow_network(nodes, edges):
     edmonds_karp = Edmonds_Karp(graph)
     edmonds_karp.find_maximum_flow()
 
+def maximum_matching(nodes,edges):
+    root = nodes[0]
+    destination = nodes[len(nodes)-2]
+    graph = Graph(root, destination, nodes, edges, False)
+    hp = HopcroftKarp(graph)
+    hp.find()
+
+def colouring_graph(nodes,edges):
+    root = nodes[0]
+    destination = nodes[len(nodes)-2]
+    graph = Graph(root, destination, nodes, edges, False)
+    cg = LawlerColouringGraphAlgorithm(graph)
+    cg.colour()
+
 
 def populate_edges(edges_representation):
     edges = []
@@ -96,7 +112,7 @@ def populate_nodes(nodes_representation):
 
 if __name__ == '__main__':
     
-    algorithm = "8" #sys.argv[1]
+    algorithm = "10" #sys.argv[1]
     file_name = "graph.net" # sys.argv[2]
     graph_representation = read_raw_input(file_name)
     nodes_representation = graph_representation[0]
@@ -128,4 +144,7 @@ if __name__ == '__main__':
         kruskal_algorithm(nodes,edges)
     elif algorithm =="8":
         flow_network(nodes, edges)
-    
+    elif algorithm == "9":
+        maximum_matching(nodes, edges)
+    elif algorithm == "10":
+        colouring_graph(nodes, edges)
