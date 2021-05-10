@@ -5,6 +5,8 @@ class LawlerColouringGraphAlgorithm:
     
     def colour(self):
         power_set = self.power_set()
+        colour_array = []
+        colour_array.append[0]
         X = self.index_values(power_set)
 
         print("not implemented yet")
@@ -13,27 +15,26 @@ class LawlerColouringGraphAlgorithm:
         index_values = []
 
         for i in range(len(set)):
-
-            indexed_values = self.set_to_zero(len(self.graph.get_nodes()))
+            indexed_values = self.init_array(len(self.graph.get_nodes()))
             for j in set[i]:
                 to_int = int(j)
                 indexed_values[to_int] = 1
             index_values.append(indexed_values)
         return index_values
         
-    def set_to_zero(self,size):
+    def init_array(self,size):
         array = []
         for i in range(size):
             array.append(0)
         return array
     def power_set(self):
         nodes = self.graph.get_nodes()
-        pow_set_size = (int) (math.pow(2, len(nodes)))
+        power_set_size = (int) (math.pow(2, len(nodes)))
         counter = 0
         j = 0
         power_set = []
 
-        for counter in range(0, pow_set_size):
+        for counter in range(0, power_set_size):
             partition = []
             for j in range(0, len(nodes)):
                 if((counter & (1 << j)) > 0):
