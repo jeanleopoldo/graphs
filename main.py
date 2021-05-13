@@ -110,9 +110,8 @@ def populate_nodes(nodes_representation):
     return nodes
 
 if __name__ == '__main__':
-    
-    algorithm = "10" #sys.argv[1]
-    file_name = "graph.net" # sys.argv[2]
+    algorithm = sys.argv[1]
+    file_name = sys.argv[2]
     graph_representation = read_raw_input(file_name)
     nodes_representation = graph_representation[0]
     edges_representation = graph_representation[1]

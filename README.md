@@ -13,5 +13,8 @@ Abaixo, a numeraçao referente a cada algoritmo:
 # 5 - StronglyConnectedComponent
 # 6 - Topological Order
 # 7 - Kruskal
+# 8 - Flow Network
+# 9 - Maximum Matching
+# 10 - Colouring graph
 
 Trabalho de grafos INE5413
