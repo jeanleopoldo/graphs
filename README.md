@@ -18,3 +18,18 @@ Abaixo, a numeraçao referente a cada algoritmo:
 # 10 - Colouring graph
 
 Trabalho de grafos INE5413
+
+
+---
+
+O input para o programa tem que ter o padrão:
+
+*vertices
+0 "a"
+1 "b"
+2 "c"
+3 "d"
+*edges
+0 3 1
+0 1 2
+1 3 1
