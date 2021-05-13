@@ -24,12 +24,12 @@ Trabalho de grafos INE5413
 
 O input para o programa tem que ter o padrão:
 
-*vertices
-0 "a"
-1 "b"
-2 "c"
-3 "d"
-*edges
-0 3 1
-0 1 2
-1 3 1
+*vertices\n
+0 "a"\n
+1 "b"\n
+2 "c"\n
+3 "d"\n
+*edges\n
+0 3 1\n
+0 1 2\n
+1 3 1\n
