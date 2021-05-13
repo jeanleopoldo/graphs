@@ -92,7 +92,6 @@ def colouring_graph(nodes,edges):
     cg = LawlerColouringGraphAlgorithm(graph)
     cg.colour()
 
-
 def populate_edges(edges_representation):
     edges = []
     for representation in edges_representation:
